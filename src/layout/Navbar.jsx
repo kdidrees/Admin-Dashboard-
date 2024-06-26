@@ -43,7 +43,7 @@ export default function Navbar() {
           )}
         </div>
         <p className="text-gray-500 text-base 2xl:text-xl font-medium 3xl:text-3xl">
-          Hasmuddin
+          Admin
         </p>
       </div>
     </div>

@@ -15,7 +15,7 @@ export default function Sidebar() {
   return (
     <>
       <div className="w-50 xl:w-56 2xl:w-64 3xl:w-96  h-screen sticky top-0 left-0 flex flex-col gap-5 3xl:gap-8 bg-[#fffff] text-gray-500 font-[poppins] font-medium text-sm 2xl:text-lg 3xl:text-3xl shadow">
-        <div className="flex justify-center">
+        <div className="flex justify-center invisible">
           <img
             src={logo}
             alt="logo"
@@ -54,7 +54,7 @@ export default function Sidebar() {
                 <li className="3xl:mt-1">Attendence</li>
               </div>
             </NavLink>
-            <NavLink
+            {/* <NavLink
               to="/leave"
               className={({ isActive }) =>
                 isActive ? "bg-blue-500 text-white rounded-lg" : null
@@ -109,10 +109,10 @@ export default function Sidebar() {
                 />
                 <li>Report</li>
               </div>
-            </NavLink>
+            </NavLink> */}
           </ul>
         </div>
-        <div className="px-2 mt-14 3xl:px-4 3xl:mt-20">
+        {/* <div className="px-2 mt-14 3xl:px-4 3xl:mt-20">
           <ul className="flex flex-col gap-3">
             <NavLink
               to="/account"
@@ -143,7 +143,7 @@ export default function Sidebar() {
               </div>
             </NavLink>
           </ul>
-        </div>
+        </div> */}
       </div>
     </>
   );
