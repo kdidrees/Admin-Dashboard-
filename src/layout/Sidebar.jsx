@@ -14,8 +14,8 @@ import { IoDocumentsOutline } from "react-icons/io5";
 export default function Sidebar() {
   return (
     <>
-      <div className="w-50 xl:w-56 2xl:w-64 3xl:w-96  h-screen sticky top-0 left-0 flex flex-col gap-5 3xl:gap-8 bg-[#fffff] text-gray-500 font-[poppins] font-medium text-sm 2xl:text-lg 3xl:text-3xl shadow">
-        <div className="flex justify-center invisible">
+      <div className="w-50 xl:w-56 2xl:w-64 border- 3xl:w-96  h-screen sticky top-0 left-0 flex flex-col gap-5 3xl:gap-8 bg-[#fffff] text-gray-500 font-[poppins] font-medium text-sm 2xl:text-lg 3xl:text-3xl shadow">
+        <div className="flex justify-center ">
           <img
             src={logo}
             alt="logo"
