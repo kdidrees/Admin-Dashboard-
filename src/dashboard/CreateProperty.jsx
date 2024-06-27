@@ -1,12 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createProperty } from "../redux/slices/propertySlice";
 
 export default function CreateProperty() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     console.log(data,'ye hi h bro');
 
     // Create a FormData object to handle file uploads
@@ -21,20 +24,16 @@ export default function CreateProperty() {
       }
     }
 
-    // try {
-    //   const response = await fetch('/api/properties/create-property', {
-    //     method: 'POST',
-    //     body: formData,
-    //   });
-    //   const result = await response.json();
-    //   console.log(result);
-
-    //   if (response.ok) {
-    //     navigate('/properties');
-    //   }
-    // } catch (error) {
-    //   console.error('Error uploading property:', error);
-    // }
+    // Dispatch createProperty asyncThunk
+    dispatch(createProperty(formData))
+      .then((response) => {
+        if (response.meta.requestStatus === 'fulfilled') {
+          navigate('/properties');
+        }
+      })
+      .catch((error) => {
+        console.error('Error uploading property:', error);
+      });
   };
 
   return (
