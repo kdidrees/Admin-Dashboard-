@@ -158,9 +158,9 @@ export default function CreateProperty() {
 
         <button
           type="submit"
-          className="btn border border-indigo-500 p-4 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500"
+          className="btn border border-indigo-500 md:text-xl p-4 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500"
         >
-          Post
+          Create 
         </button>
       </form>
     </>
