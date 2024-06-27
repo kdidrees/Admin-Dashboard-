@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import { FaApple } from "react-icons/fa";
 import { loginUser } from "../redux/slices/LoginSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const { userInfo } = useSelector((state) => state.user);
+
+  if (userInfo) {
+    navigate("/");
+  }
 
   const dispatch = useDispatch();
 
