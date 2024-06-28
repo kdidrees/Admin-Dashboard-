@@ -41,7 +41,7 @@ export default function Sidebar() {
               </div>
             </NavLink>
             <NavLink
-              to="/attendence"
+              to="/all-properties"
               className={({ isActive }) =>
                 isActive ? "bg-blue-500 text-white rounded-lg" : null
               }

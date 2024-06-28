@@ -2,12 +2,12 @@ import "./App.css";
 import Layout from "./layout/Index.jsx";
 import DashBoard from "./dashboard/index.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Attendance from "./attendence/index.jsx";
 import LoginForm from "./login/Login.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "./redux/slices/LoginSlice.js";
 import { useEffect } from "react";
 import ProtectedRoute from "./protectedroute/ProtectedRoute.js";
+import AllProperty from "./allproperty/AllProperty.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ function App() {
             }
           >
             <Route path="/" element={<DashBoard />} />
-            <Route path="/attendence" element={<Attendance />} />
+            <Route path="/all-properties" element={<AllProperty/>} />
           </Route>
 
           <Route path="/login" element={<LoginForm />} />
