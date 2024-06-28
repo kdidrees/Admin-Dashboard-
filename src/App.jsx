@@ -8,6 +8,7 @@ import { fetchUser } from "./redux/slices/LoginSlice.js";
 import { useEffect } from "react";
 import ProtectedRoute from "./protectedroute/ProtectedRoute.js";
 import AllProperty from "./allproperty/AllProperty.jsx";
+import EditProperty from "./editproperty/EditProperty.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
           >
             <Route path="/" element={<DashBoard />} />
             <Route path="/all-properties" element={<AllProperty/>} />
+            <Route path="/edit-property/:id" element={<EditProperty/>} />
           </Route>
 
           <Route path="/login" element={<LoginForm />} />
