@@ -29,7 +29,7 @@ export default function Sidebar() {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                isActive ? "bg-blue-500 text-white rounded-lg" : null
+                isActive ? "bg-black text-white rounded-lg" : null
               }
             >
               <div className="flex gap-5 items-center px-3 py-2  hover:bg-gray-100 hover:text-black hover:rounded-lg">
@@ -37,13 +37,13 @@ export default function Sidebar() {
                   size={20}
                   className="2xl:w-[25px] 2xl:h-[22px] 3xl:w-[40px] 3xl:h-[35px]"
                 />
-                <li className="3xl:mt-2">Create Property</li>
+                <li className="xl:text-2xl">Create Property</li>
               </div>
             </NavLink>
             <NavLink
               to="/all-properties"
               className={({ isActive }) =>
-                isActive ? "bg-blue-500 text-white rounded-lg" : null
+                isActive ? "bg-black text-white rounded-lg" : null
               }
             >
               <div className="flex gap-5 items-center px-3 py-2 hover:bg-gray-100 hover:text-black hover:rounded-lg">
@@ -51,7 +51,7 @@ export default function Sidebar() {
                   size={20}
                   className="2xl:w-[25px] 2xl:h-[22px] 3xl:w-[40px] 3xl:h-[35px]"
                 />
-                <li className="3xl:mt-1">All Properties</li>
+                <li className="xl:text-2xl mt-4">All Properties</li>
               </div>
             </NavLink>
           </ul>

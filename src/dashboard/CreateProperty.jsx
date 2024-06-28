@@ -28,7 +28,7 @@ export default function CreateProperty() {
     dispatch(createProperty(formData))
       .then((response) => {
         if (response.meta.requestStatus === 'fulfilled') {
-          navigate('/properties');
+          navigate('/all-properties');
         }
       })
       .catch((error) => {
@@ -94,6 +94,7 @@ export default function CreateProperty() {
             className="title bg-gray-100 border md:text-xl border-gray-300 p-4 mb-4 outline-none"
             placeholder="Lot size"
             type="number"
+            step={'any'}
             required
           />
 
