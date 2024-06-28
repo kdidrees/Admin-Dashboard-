@@ -19,8 +19,8 @@ export default function Sidebar() {
           <img
             src={logo}
             alt="logo"
-            height={50}
-            width={50}
+            height={30}
+            width={30}
             className="m-5 2xl:h-10 2xl:w-20 2xl:m-10 3xl:w-28 3xl:h-16"
           />
         </div>

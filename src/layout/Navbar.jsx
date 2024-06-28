@@ -64,7 +64,7 @@ export default function Navbar() {
             </div>
           )}
         </div>
-        <p className="text-gray-500 text-base 2xl:text-xl font-medium 3xl:text-3xl">
+        <p className="text-gray-500 md:text-xl  font-medium">
           {userInfo?.name}
         </p>
       </div>
