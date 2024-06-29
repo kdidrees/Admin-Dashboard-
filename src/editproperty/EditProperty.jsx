@@ -52,37 +52,41 @@ export default function EditProperty() {
     }));
   };
 
-  const onSubmit = (data) => {
-    const updatedData = {
-      price: data.price,
-      bedrooms: data.bedrooms,
-      bathrooms: data.bathrooms,
-      area: data.area,
-      address: data.address,
-      lotSize: data.lotSize,
-      propertyType: data.propertyType,
-      daysOnRealtor: data.daysOnRealtor,
-      pricePerSqft: data.pricePerSqft,
-      yearBuilt: data.yearBuilt,
-      garage: data.garage,
-      description: data.description,
-      images: formValues.images,
-    };
+  // Handle form submission
+  const onSubmit = async (data) => {
+    const formDataToSend = new FormData();
+    formDataToSend.append("price", data.price);
+    formDataToSend.append("bedrooms", data.bedrooms);
+    formDataToSend.append("bathrooms", data.bathrooms);
+    formDataToSend.append("area", data.area);
+    formDataToSend.append("address", data.address);
+    formDataToSend.append("lotSize", data.lotSize);
+    formDataToSend.append("propertyType", data.propertyType);
+    formDataToSend.append("daysOnRealtor", data.daysOnRealtor);
+    formDataToSend.append("pricePerSqft", data.pricePerSqft);
+    formDataToSend.append("yearBuilt", data.yearBuilt);
+    formDataToSend.append("garage", data.garage);
+    formDataToSend.append("description", data.description);
 
-    console.log(formValues.images);
-
-    dispatch(updatePropertyById({ id, updatedData }))
-      .then((response) => {
-        if (response.meta.requestStatus === "fulfilled") {
-          console.log("updated successfully");
-          dispatch(fetchAllProperties()); // Fetch updated property list
-          navigate("/all-properties"); // Redirect after successful update and fetching updated list
-        }
-      })
-      .catch((error) => {
-        console.error("Error updating property:", error);
-        // Handle errors, possibly show an error message to the user
+    if (formValues.images) {
+      formValues.images.forEach((image, index) => {
+        formDataToSend.append(`images[${index}]`, image);
       });
+    }
+
+    try {
+      const response = await dispatch(
+        updatePropertyById({ id, updatedData: formDataToSend })
+      );
+      if (response.meta.requestStatus === "fulfilled") {
+        console.log("Property updated successfully");
+        dispatch(fetchAllProperties()); // Fetch updated property list
+        navigate("/all-properties"); // Redirect after successful update and fetching updated list
+      }
+    } catch (error) {
+      console.error("Error updating property:", error);
+      // Handle errors, possibly show an error message to the user
+    }
   };
 
   // handle loading
@@ -119,7 +123,10 @@ export default function EditProperty() {
               </div>
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-              <form onSubmit={handleSubmit(onSubmit)}  encType="multipart/form-data">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                encType="multipart/form-data"
+              >
                 <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
                   Property Information
                 </h6>
