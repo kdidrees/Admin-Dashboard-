@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createProperty, fetchAllProperties } from "../redux/slices/propertySlice";
+import {
+  createProperty,
+  fetchAllProperties,
+} from "../redux/slices/propertySlice";
 import {
   getPropertyById,
   updatePropertyById,
@@ -41,6 +44,14 @@ export default function EditProperty() {
     }
   }, [property, setValue]);
 
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files); // Convert FileList to Array
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      images: files,
+    }));
+  };
+
   const onSubmit = (data) => {
     const updatedData = {
       price: data.price,
@@ -55,7 +66,10 @@ export default function EditProperty() {
       yearBuilt: data.yearBuilt,
       garage: data.garage,
       description: data.description,
+      images: formValues.images,
     };
+
+    console.log(formValues.images);
 
     dispatch(updatePropertyById({ id, updatedData }))
       .then((response) => {
@@ -105,7 +119,7 @@ export default function EditProperty() {
               </div>
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(onSubmit)}  encType="multipart/form-data">
                 <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
                   Property Information
                 </h6>
@@ -403,7 +417,7 @@ export default function EditProperty() {
                   </div>
                 </div>
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
-                {/* <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
                   Images
                 </h6>
                 <div className="flex flex-wrap">
@@ -421,7 +435,7 @@ export default function EditProperty() {
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Images"
                         multiple
-                        onChange={(e) => handleInputChange(e)}
+                        onChange={handleFileChange}
                       />
                       {errors.file && (
                         <span className="text-red-500 md:text-base mt-3">
@@ -430,7 +444,7 @@ export default function EditProperty() {
                       )}
                     </div>
                   </div>
-                </div> */}
+                </div>
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
                 <div className="text-center mt-6">
                   <button

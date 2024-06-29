@@ -16,7 +16,7 @@ export default function AllProperty() {
   const myimages = properties.map((data) =>
     data.images[0].split("public\\Images\\").join("")
   );
-  console.log(myimages);
+  // console.log(myimages);
 
   useEffect(() => {
     dispatch(fetchAllProperties());
