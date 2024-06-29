@@ -11,7 +11,7 @@ export const createProperty = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/properties/create-property",
+        "http://192.168.1.77:4000/api/properties/create-property",
         formData,
         {
           headers: {
@@ -37,7 +37,7 @@ export const fetchAllProperties = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/properties/all"
+        "http://192.168.1.77:4000/api/properties/all"
       );
       return response.data;
     } catch (error) {
@@ -53,7 +53,7 @@ export const getPropertyById = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/properties/getpropertybyid/${id}`
+        `http://192.168.1.77:4000/api/properties/getpropertybyid/${id}`
       );
       return response.data;
     } catch (error) {

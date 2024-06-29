@@ -11,11 +11,12 @@ export default function EditProperty() {
 
   const { property, loading, error } = useSelector((state) => state.property);
 
-  console.log(property);
+  console.log(data);
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
@@ -28,8 +29,20 @@ export default function EditProperty() {
   useEffect(() => {
     if (property) {
       setData(property);
+      // Set form field values using setValue
+      setValue("price", property.price);
+      setValue("bedrooms", property.bedrooms);
+      setValue("bathrooms", property.bathrooms);
+      setValue("area", property.area);
+      setValue("address", property.address);
+      setValue("lotSize", property.lotSize);
+      setValue("propertyType", property.propertyType);
+      setValue("daysOnRealtor", property.daysOnRealtor);
+      setValue("pricePerSqft", property.pricePerSqft);
+      setValue("yearBuilt", property.yearBuilt);
+      setValue("garage", property.garage);
     }
-  }, [property]);
+  }, [property,setValue]);
 
   // handle loading
   if (loading) {
@@ -80,6 +93,7 @@ export default function EditProperty() {
                       </label>
                       <input
                         type="text"
+                        value={data.price}
                         {...register("price", {
                           required: "Price is required",
                           pattern: {
