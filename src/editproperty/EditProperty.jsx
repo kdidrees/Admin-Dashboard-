@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { createProperty } from "../redux/slices/propertySlice";
+import { getPropertyById } from "../redux/slices/propertySlice";
 
 export default function EditProperty() {
+  const [data, setData] = useState({});
+  const { id } = useParams();
+
+  const { property, loading, error } = useSelector((state) => state.property);
+
+  console.log(property);
+
   const {
     register,
     handleSubmit,
@@ -13,32 +21,30 @@ export default function EditProperty() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    console.log(data, "ye hi h bro");
+  useEffect(() => {
+    dispatch(getPropertyById(id));
+  }, [dispatch, id]);
 
-    // Create a FormData object to handle file uploads
-    const formData = new FormData();
-    for (let key in data) {
-      if (key === "file") {
-        for (let i = 0; i < data[key].length; i++) {
-          formData.append("images", data[key][i]);
-        }
-      } else {
-        formData.append(key, data[key]);
-      }
+  useEffect(() => {
+    if (property) {
+      setData(property);
     }
+  }, [property]);
 
-    // Dispatch createProperty asyncThunk
-    dispatch(createProperty(formData))
-      .then((response) => {
-        if (response.meta.requestStatus === "fulfilled") {
-          navigate("/all-properties");
-        }
-      })
-      .catch((error) => {
-        console.error("Error uploading property:", error);
-      });
-  };
+  // handle loading
+  if (loading) {
+    return <p>Loading....</p>;
+  }
+
+  // handle error
+
+  if (error) {
+    return <p>error fetching property : {error.error}</p>;
+  }
+
+  if (!property) {
+    return <p>No property found with ID : {id}</p>;
+  }
 
   return (
     <>
@@ -59,7 +65,7 @@ export default function EditProperty() {
               </div>
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form>
                 <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
                   Property Information
                 </h6>
@@ -185,7 +191,9 @@ export default function EditProperty() {
                       </label>
                       <input
                         type="text"
-                        {...register("address", { required: "address is required" })}
+                        {...register("address", {
+                          required: "address is required",
+                        })}
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Address"
                       />
@@ -233,7 +241,9 @@ export default function EditProperty() {
                       </label>
                       <input
                         type="text"
-                        {...register("propertyType", { required: "property type is required" })}
+                        {...register("propertyType", {
+                          required: "property type is required",
+                        })}
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Property type"
                       />
@@ -367,7 +377,9 @@ export default function EditProperty() {
                       </label>
                       <input
                         type="file"
-                        {...register("file", { required: "images are required" })}
+                        {...register("file", {
+                          required: "images are required",
+                        })}
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Images"
                         multiple

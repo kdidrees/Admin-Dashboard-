@@ -46,10 +46,27 @@ export const fetchAllProperties = createAsyncThunk(
   }
 );
 
+// get property by id
+
+export const getPropertyById = createAsyncThunk(
+  "property/editProperty",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/api/properties/getpropertybyid/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const propertySlice = createSlice({
   name: "property",
   initialState: {
     properties: [],
+    property: null,
     loading: false,
     error: null,
   },
@@ -77,6 +94,18 @@ const propertySlice = createSlice({
         state.properties = action.payload;
       })
       .addCase(fetchAllProperties.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(getPropertyById.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getPropertyById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.property = action.payload;
+      })
+      .addCase(getPropertyById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
