@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createProperty } from "../redux/slices/propertySlice";
-import { getPropertyById } from "../redux/slices/propertySlice";
+import { createProperty, fetchAllProperties } from "../redux/slices/propertySlice";
+import {
+  getPropertyById,
+  updatePropertyById,
+} from "../redux/slices/propertySlice";
 
 export default function EditProperty() {
-  const [data, setData] = useState({});
+  const [formValues, setFormValues] = useState({});
   const { id } = useParams();
 
   const { property, loading, error } = useSelector((state) => state.property);
 
-  console.log(data);
+  // console.log(data);
 
   const {
     register,
@@ -28,21 +31,45 @@ export default function EditProperty() {
 
   useEffect(() => {
     if (property) {
-      setData(property);
+      setFormValues(property);
       // Set form field values using setValue
-      setValue("price", property.price);
-      setValue("bedrooms", property.bedrooms);
-      setValue("bathrooms", property.bathrooms);
-      setValue("area", property.area);
-      setValue("address", property.address);
-      setValue("lotSize", property.lotSize);
-      setValue("propertyType", property.propertyType);
-      setValue("daysOnRealtor", property.daysOnRealtor);
-      setValue("pricePerSqft", property.pricePerSqft);
-      setValue("yearBuilt", property.yearBuilt);
-      setValue("garage", property.garage);
+      for (const key in property) {
+        if (property.hasOwnProperty(key)) {
+          setValue(key, property[key]);
+        }
+      }
     }
-  }, [property,setValue]);
+  }, [property, setValue]);
+
+  const onSubmit = (data) => {
+    const updatedData = {
+      price: data.price,
+      bedrooms: data.bedrooms,
+      bathrooms: data.bathrooms,
+      area: data.area,
+      address: data.address,
+      lotSize: data.lotSize,
+      propertyType: data.propertyType,
+      daysOnRealtor: data.daysOnRealtor,
+      pricePerSqft: data.pricePerSqft,
+      yearBuilt: data.yearBuilt,
+      garage: data.garage,
+      description: data.description,
+    };
+
+    dispatch(updatePropertyById({ id, updatedData }))
+      .then((response) => {
+        if (response.meta.requestStatus === "fulfilled") {
+          console.log("updated successfully");
+          dispatch(fetchAllProperties()); // Fetch updated property list
+          navigate("/all-properties"); // Redirect after successful update and fetching updated list
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating property:", error);
+        // Handle errors, possibly show an error message to the user
+      });
+  };
 
   // handle loading
   if (loading) {
@@ -78,7 +105,7 @@ export default function EditProperty() {
               </div>
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
                   Property Information
                 </h6>
@@ -93,7 +120,6 @@ export default function EditProperty() {
                       </label>
                       <input
                         type="text"
-                        value={data.price}
                         {...register("price", {
                           required: "Price is required",
                           pattern: {
@@ -377,7 +403,7 @@ export default function EditProperty() {
                   </div>
                 </div>
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
-                <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                {/* <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
                   Images
                 </h6>
                 <div className="flex flex-wrap">
@@ -391,12 +417,11 @@ export default function EditProperty() {
                       </label>
                       <input
                         type="file"
-                        {...register("file", {
-                          required: "images are required",
-                        })}
+                        {...register("file")}
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Images"
                         multiple
+                        onChange={(e) => handleInputChange(e)}
                       />
                       {errors.file && (
                         <span className="text-red-500 md:text-base mt-3">
@@ -405,7 +430,7 @@ export default function EditProperty() {
                       )}
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
                 <div className="text-center mt-6">
                   <button

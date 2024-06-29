@@ -62,6 +62,18 @@ export const getPropertyById = createAsyncThunk(
   }
 );
 
+// update the property by id 
+export const updatePropertyById = createAsyncThunk(
+  "property/updatePropertyById",
+  async ({ id, updatedData }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`http://192.168.1.77:4000/api/properties/edit-property/${id}`, updatedData);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 const propertySlice = createSlice({
   name: "property",
   initialState: {
@@ -108,7 +120,19 @@ const propertySlice = createSlice({
       .addCase(getPropertyById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+      .addCase(updatePropertyById.pending,(state,action)=>{
+        state.loading = true;
+        state.error = null
+      })
+      .addCase(updatePropertyById.fulfilled,(state,action)=>{
+        state.loading = false;
+        state.property = action.payload
+      })
+      .addCase(updatePropertyById.rejected,(state,action)=>{
+        state.loading = false,
+        state.error = action.payload
+      })
   },
 });
 
