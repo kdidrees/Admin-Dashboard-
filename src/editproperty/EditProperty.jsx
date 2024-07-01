@@ -110,12 +110,12 @@ export default function EditProperty() {
                 <h6 className="text-blueGray-700 text-xl font-bold">
                   Update Property
                 </h6>
-                {/* <button
-                  className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                <button
+                  className="bg-red-600 text-white  font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                   type="button"
                 >
-                  Settings
-                </button> */}
+                  Delete Property
+                </button>
               </div>
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
