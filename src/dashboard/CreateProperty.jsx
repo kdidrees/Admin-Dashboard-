@@ -246,7 +246,7 @@ export default function CreateProperty() {
                         <option value="house">House</option>
                         <option value="mobile">Apartment</option>
                         <option value="condo">Condo</option>
-                        <option value="townhome">Townhouse</option>
+                        <option value="townhome">TownHome</option>
                         <option value="land">Land</option>
                         <option value="multi-family">Multi Family</option>
                         <option value="farm">Farm</option>
