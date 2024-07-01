@@ -37,7 +37,7 @@ export default function Sidebar() {
                   size={20}
                   className="2xl:w-[25px] 2xl:h-[22px] 3xl:w-[40px] 3xl:h-[35px]"
                 />
-                <li className="xl:text-xl">Create Property</li>
+                <li className="text-xl">Create Property</li>
               </div>
             </NavLink>
             <NavLink
@@ -51,7 +51,7 @@ export default function Sidebar() {
                   size={20}
                   className="2xl:w-[25px] 2xl:h-[22px] 3xl:w-[40px] 3xl:h-[35px]"
                 />
-                <li className="xl:text-xl mt-4">All Properties</li>
+                <li className="lg:text-xl mt-4">All Properties</li>
               </div>
             </NavLink>
           </ul>

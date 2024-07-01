@@ -79,6 +79,22 @@ export const updatePropertyById = createAsyncThunk(
     }
   }
 );
+
+// delete property by id
+export const deletePropertyById = createAsyncThunk(
+  "property/deletePropertyById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(
+        `http://192.168.1.77:4000/api/properties/delete-property/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data);
+    }
+  }
+);
+
 const propertySlice = createSlice({
   name: "property",
   initialState: {
@@ -136,6 +152,20 @@ const propertySlice = createSlice({
       })
       .addCase(updatePropertyById.rejected, (state, action) => {
         (state.loading = false), (state.error = action.payload);
+      })
+      .addCase(deletePropertyById.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deletePropertyById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.properties = state.properties.filter(
+          (property) => property._id !== action.payload.id
+        );
+      })
+      .addCase(deletePropertyById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.id;
       });
   },
 });

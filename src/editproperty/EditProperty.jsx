@@ -5,10 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createProperty,
   fetchAllProperties,
-} from "../redux/slices/propertySlice";
-import {
   getPropertyById,
   updatePropertyById,
+  deletePropertyById,
 } from "../redux/slices/propertySlice";
 
 export default function EditProperty() {
@@ -85,6 +84,18 @@ export default function EditProperty() {
       });
   };
 
+  const handleDelete = (e) => {
+    e.preventDefault();
+
+    dispatch(deletePropertyById(id))
+      .then((res) => {
+        if (res.meta.requestStatus === "fulfilled") {
+          navigate("/all-properties");
+        }
+      })
+      .catch((err) => console.log(err, "there is error deleting the property"));
+  };
+
   // handle loading
   if (loading) {
     return <p>Loading....</p>;
@@ -111,6 +122,7 @@ export default function EditProperty() {
                   Update Property
                 </h6>
                 <button
+                  onClick={handleDelete}
                   className="bg-red-600 text-white  font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                   type="button"
                 >
