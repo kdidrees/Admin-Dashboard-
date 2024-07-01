@@ -9,10 +9,12 @@ import {
   updatePropertyById,
   deletePropertyById,
 } from "../redux/slices/propertySlice";
+import { useRef } from "react";
 
 export default function EditProperty() {
   const [formValues, setFormValues] = useState({});
   const { id } = useParams();
+
 
   const { property, loading, error } = useSelector((state) => state.property);
 
@@ -34,6 +36,8 @@ export default function EditProperty() {
   useEffect(() => {
     if (property) {
       setFormValues(property);
+
+
       // Set form field values using setValue
       for (const key in property) {
         if (property.hasOwnProperty(key)) {
@@ -68,20 +72,20 @@ export default function EditProperty() {
       images: formValues.images,
     };
 
-    console.log(formValues.images);
+    console.log(updatedData,'kd data here');
 
-    dispatch(updatePropertyById({ id, updatedData }))
-      .then((response) => {
-        if (response.meta.requestStatus === "fulfilled") {
-          console.log("updated successfully");
-          dispatch(fetchAllProperties()); // Fetch updated property list
-          navigate("/all-properties"); // Redirect after successful update and fetching updated list
-        }
-      })
-      .catch((error) => {
-        console.error("Error updating property:", error);
-        // Handle errors, possibly show an error message to the user
-      });
+    // dispatch(updatePropertyById({ id, updatedData }))
+    //   .then((response) => {
+    //     if (response.meta.requestStatus === "fulfilled") {
+    //       console.log("updated successfully");
+    //       dispatch(fetchAllProperties()); // Fetch updated property list
+    //       navigate("/all-properties"); // Redirect after successful update and fetching updated list
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error updating property:", error);
+    //     // Handle errors, possibly show an error message to the user
+    //   });
   };
 
   const handleDelete = (e) => {
@@ -95,6 +99,8 @@ export default function EditProperty() {
       })
       .catch((err) => console.log(err, "there is error deleting the property"));
   };
+
+  console.log(property?.propertyType, "kd property here");
 
   // handle loading
   if (loading) {
@@ -308,14 +314,25 @@ export default function EditProperty() {
                       >
                         Property Type
                       </label>
-                      <input
-                        type="text"
+                      <select
                         {...register("propertyType", {
-                          required: "property type is required",
+                          required: "Property type is required",
                         })}
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Property type"
-                      />
+                        defaultValue={formValues.propertyType || ""}
+                        onChange={(e)=>setValue("propertyType",e.target.value)}
+                      >
+                        <option value="" disabled hidden>
+                          Select Property Type
+                        </option>
+                        <option value="house">House</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="condo">Condo</option>
+                        <option value="townhouse">Townhouse</option>
+                        <option value="land">Land</option>
+                        <option value="commercial">Commercial</option>
+                        <option value="singlefamily">Single Family</option>
+                      </select>
                       {errors.propertyType && (
                         <span className="text-red-500 md:text-base mt-3">
                           {errors.propertyType.message}
