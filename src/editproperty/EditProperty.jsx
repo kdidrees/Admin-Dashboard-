@@ -15,7 +15,6 @@ export default function EditProperty() {
   const [formValues, setFormValues] = useState({});
   const { id } = useParams();
 
-
   const { property, loading, error } = useSelector((state) => state.property);
 
   // console.log(data);
@@ -36,7 +35,6 @@ export default function EditProperty() {
   useEffect(() => {
     if (property) {
       setFormValues(property);
-
 
       // Set form field values using setValue
       for (const key in property) {
@@ -72,7 +70,7 @@ export default function EditProperty() {
       images: formValues.images,
     };
 
-    console.log(updatedData,'kd data here');
+    console.log(updatedData, "kd data here");
 
     dispatch(updatePropertyById({ id, updatedData }))
       .then((response) => {
@@ -320,7 +318,9 @@ export default function EditProperty() {
                         })}
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         defaultValue={formValues.propertyType || ""}
-                        onChange={(e)=>setValue("propertyType",e.target.value)}
+                        onChange={(e) =>
+                          setValue("propertyType", e.target.value)
+                        }
                       >
                         <option value="" disabled hidden>
                           Select Property Type
