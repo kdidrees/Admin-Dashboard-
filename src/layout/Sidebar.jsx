@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../assets/logo.png";
 import { FaHouse } from "react-icons/fa6";
 import { BsPersonFillCheck } from "react-icons/bs";
 import { BiCalendarExclamation } from "react-icons/bi";
@@ -10,6 +9,7 @@ import { MdOutlineGroups2 } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { IoDocumentsOutline } from "react-icons/io5";
+import logo from "../assets/logo.svg";
 
 export default function Sidebar() {
   return (
@@ -19,9 +19,9 @@ export default function Sidebar() {
           <img
             src={logo}
             alt="logo"
-            height={30}
-            width={30}
-            className="m-5 2xl:h-10 2xl:w-20 2xl:m-10 3xl:w-28 3xl:h-16"
+            // height={30}
+            // width={30}
+            className="ml-6"
           />
         </div>
         <div className="px-2 3xl:px-4">
