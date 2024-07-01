@@ -71,12 +71,7 @@ export const updatePropertyById = createAsyncThunk(
     try {
       const response = await axios.put(
         `http://192.168.1.77:4000/api/properties/edit-property/${id}`,
-        updatedData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        updatedData
       );
       return response.data;
     } catch (error) {
