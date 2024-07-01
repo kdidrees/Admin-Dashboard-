@@ -123,7 +123,7 @@ export default function EditProperty() {
             <div className="rounded-t bg-white mb-0 px-6 py-6">
               <div className="text-center flex justify-between">
                 <h6 className="text-blueGray-700 text-xl font-bold">
-                  Update Property
+                  Update Property Details
                 </h6>
                 <button
                   onClick={handleDelete}

@@ -244,12 +244,12 @@ export default function CreateProperty() {
                           Select Property Type
                         </option>
                         <option value="house">House</option>
-                        <option value="apartment">Apartment</option>
+                        <option value="mobile">Apartment</option>
                         <option value="condo">Condo</option>
-                        <option value="townhouse">Townhouse</option>
+                        <option value="townhome">Townhouse</option>
                         <option value="land">Land</option>
-                        <option value="commercial">Commercial</option>
-                        <option value="singlefamily">Single Family</option>
+                        <option value="multi-family">Multi Family</option>
+                        <option value="farm">Farm</option>
                       </select>
                       {errors.propertyType && (
                         <span className="text-red-500 md:text-base mt-3">
