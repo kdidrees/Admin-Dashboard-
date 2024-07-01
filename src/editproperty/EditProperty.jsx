@@ -74,18 +74,18 @@ export default function EditProperty() {
 
     console.log(updatedData,'kd data here');
 
-    // dispatch(updatePropertyById({ id, updatedData }))
-    //   .then((response) => {
-    //     if (response.meta.requestStatus === "fulfilled") {
-    //       console.log("updated successfully");
-    //       dispatch(fetchAllProperties()); // Fetch updated property list
-    //       navigate("/all-properties"); // Redirect after successful update and fetching updated list
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error updating property:", error);
-    //     // Handle errors, possibly show an error message to the user
-    //   });
+    dispatch(updatePropertyById({ id, updatedData }))
+      .then((response) => {
+        if (response.meta.requestStatus === "fulfilled") {
+          console.log("updated successfully");
+          dispatch(fetchAllProperties()); // Fetch updated property list
+          navigate("/all-properties"); // Redirect after successful update and fetching updated list
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating property:", error);
+        // Handle errors, possibly show an error message to the user
+      });
   };
 
   const handleDelete = (e) => {
