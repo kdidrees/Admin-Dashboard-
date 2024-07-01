@@ -249,6 +249,7 @@ export default function CreateProperty() {
                         <option value="townhouse">Townhouse</option>
                         <option value="land">Land</option>
                         <option value="commercial">Commercial</option>
+                        <option value="singlefamily">Single Family</option>
                       </select>
                       {errors.propertyType && (
                         <span className="text-red-500 md:text-base mt-3">

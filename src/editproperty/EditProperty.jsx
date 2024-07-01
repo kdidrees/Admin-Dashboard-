@@ -108,7 +108,7 @@ export default function EditProperty() {
             <div className="rounded-t bg-white mb-0 px-6 py-6">
               <div className="text-center flex justify-between">
                 <h6 className="text-blueGray-700 text-xl font-bold">
-                  Create New Property
+                  Update Property
                 </h6>
                 {/* <button
                   className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
@@ -419,7 +419,7 @@ export default function EditProperty() {
                     </div>
                   </div>
                 </div>
-                <hr className="mt-6 border-b-1 border-blueGray-300" />
+                {/* <hr className="mt-6 border-b-1 border-blueGray-300" />
                 <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
                   Images
                 </h6>
@@ -447,7 +447,7 @@ export default function EditProperty() {
                       )}
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
                 <div className="text-center mt-6">
                   <button
