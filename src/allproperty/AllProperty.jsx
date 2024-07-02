@@ -17,7 +17,7 @@ export default function AllProperty() {
 
   // const myimages = properties.map((data) =>
   //   data.images[0].split("public\\Images\\").join("")
-  // );
+  // ); 
   // console.log(myimages);
 
   useEffect(() => {
@@ -174,7 +174,7 @@ export default function AllProperty() {
         <ul className="flex justify-center mt-4 py-8">
           <li>
             <button
-              className="mx-1 flex h-9 w-16 items-center justify-center rounded-full border border-blue-gray-100 bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
+              className="mx-1 flex h-9 w-24  items-center justify-center rounded-full border border-blue-gray-100 bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               aria-label="Previous"
@@ -187,7 +187,11 @@ export default function AllProperty() {
             <li key={index + 1}>
               <button
                 onClick={() => handlePageChange(index + 1)}
-                className={`mx-1 flex h-9 w-9 items-center justify-center rounded-full ${index+1===currentPage?"bg-black text-white":"bg-white text-black"} p-0 text-sm text-black shadow-md shadow-pink-500/20 transition duration-150 ease-in-out`}
+                className={`mx-1 flex h-9 w-9 items-center justify-center rounded-full ${
+                  index + 1 === currentPage
+                    ? "bg-black text-white"
+                    : "bg-white text-black"
+                } p-0 text-sm text-black shadow-md shadow-pink-500/20 transition duration-150 ease-in-out`}
               >
                 {index + 1}
               </button>

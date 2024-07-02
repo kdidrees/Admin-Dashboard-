@@ -35,9 +35,10 @@ export const createProperty = createAsyncThunk(
 export const fetchAllProperties = createAsyncThunk(
   "property/fetchAllProperties",
   async (page, { rejectWithValue }) => {
+    const limit = 5;  // it is for admin panel only 
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/properties/all?page=${page}`
+        `http://localhost:4000/api/properties/all?page=${page}&limit=${limit}`
       );
       return response.data;
     } catch (error) {
