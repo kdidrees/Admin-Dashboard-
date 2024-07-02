@@ -13,9 +13,9 @@ export default function AllProperty() {
   const dispatch = useDispatch();
   const { properties, loading } = useSelector((state) => state.property);
 
-  const myimages = properties.map((data) =>
-    data.images[0].split("public\\Images\\").join("")
-  );
+  // const myimages = properties.map((data) =>
+  //   data.images[0].split("public\\Images\\").join("")
+  // );
   // console.log(myimages);
 
   useEffect(() => {

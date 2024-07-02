@@ -39,7 +39,7 @@ export const fetchAllProperties = createAsyncThunk(
       const response = await axios.get(
         "http://localhost:4000/api/properties/all"
       );
-      return response.data;
+      return response.data.properties;
     } catch (error) {
       return rejectWithValue(error.response?.data);
     }
