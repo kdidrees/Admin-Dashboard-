@@ -34,12 +34,12 @@ export const createProperty = createAsyncThunk(
 
 export const fetchAllProperties = createAsyncThunk(
   "property/fetchAllProperties",
-  async (_, { rejectWithValue }) => {
+  async (page, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/properties/all"
+        `http://localhost:4000/api/properties/all?page=${page}`
       );
-      return response.data.properties;
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data);
     }
@@ -99,6 +99,8 @@ const propertySlice = createSlice({
   name: "property",
   initialState: {
     properties: [],
+    currentPage:1,
+    totalPages:1,
     property: null,
     loading: false,
     error: null,
@@ -124,7 +126,9 @@ const propertySlice = createSlice({
       })
       .addCase(fetchAllProperties.fulfilled, (state, action) => {
         state.loading = false;
-        state.properties = action.payload;
+        state.properties = action.payload.properties;
+        state.currentPage = action.payload.currentPage;
+        state.totalPages = action.payload.totalPages;
       })
       .addCase(fetchAllProperties.rejected, (state, action) => {
         state.loading = false;

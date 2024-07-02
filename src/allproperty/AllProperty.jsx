@@ -11,7 +11,9 @@ import { Link } from "react-router-dom";
 
 export default function AllProperty() {
   const dispatch = useDispatch();
-  const { properties, loading } = useSelector((state) => state.property);
+  const { properties, currentPage, totalPages, loading } = useSelector(
+    (state) => state.property
+  );
 
   // const myimages = properties.map((data) =>
   //   data.images[0].split("public\\Images\\").join("")
@@ -19,8 +21,12 @@ export default function AllProperty() {
   // console.log(myimages);
 
   useEffect(() => {
-    dispatch(fetchAllProperties());
-  }, [dispatch]);
+    dispatch(fetchAllProperties(currentPage)); // fech properties for current page intitially
+  }, [dispatch, currentPage]);
+
+  const handlePageChange = (page) => {
+    dispatch(fetchAllProperties(page)); // fetch  properties for selected page
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -159,7 +165,47 @@ export default function AllProperty() {
             </>
           );
         })}
+
+        {/* put the pagination here */}
       </div>
+
+      {/* pagination here */}
+      <nav>
+        <ul className="flex justify-center mt-4 py-8">
+          <li>
+            <button
+              className="mx-1 flex h-9 w-16 items-center justify-center rounded-full border border-blue-gray-100 bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              aria-label="Previous"
+            >
+              prev
+            </button>
+          </li>
+
+          {Array.from({ length: totalPages }, (_, index) => (
+            <li key={index + 1}>
+              <button
+                onClick={() => handlePageChange(index + 1)}
+                className={`mx-1 flex h-9 w-9 items-center justify-center rounded-full ${index+1===currentPage?"bg-black text-white":"bg-white text-black"} p-0 text-sm text-black shadow-md shadow-pink-500/20 transition duration-150 ease-in-out`}
+              >
+                {index + 1}
+              </button>
+            </li>
+          ))}
+
+          <li>
+            <button
+              className="mx-1 flex h-9 w-16 items-center justify-center rounded-full border border-blue-gray-100 bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              aria-label="Next"
+            >
+              next
+            </button>
+          </li>
+        </ul>
+      </nav>
     </>
   );
 }
