@@ -11,7 +11,7 @@ export const createProperty = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/properties/create-property",
+        "https://urdreamhoused-backend-1f3cc2e36009.herokuapp.com/api/properties/create-property",
         formData,
         {
           headers: {
@@ -38,7 +38,7 @@ export const fetchAllProperties = createAsyncThunk(
     const limit = 5;  // it is for admin panel only 
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/properties/all?page=${page}&limit=${limit}`
+        `https://urdreamhoused-backend-1f3cc2e36009.herokuapp.com/api/properties/all?page=${page}&limit=${limit}`
       );
       return response.data;
     } catch (error) {
@@ -54,7 +54,7 @@ export const getPropertyById = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/properties/getpropertybyid/${id}`
+        `https://urdreamhoused-backend-1f3cc2e36009.herokuapp.com/api/properties/getpropertybyid/${id}`
       );
       return response.data;
     } catch (error) {
@@ -71,7 +71,7 @@ export const updatePropertyById = createAsyncThunk(
 
     try {
       const response = await axios.put(
-        `http://localhost:4000/api/properties/edit-property/${id}`,
+        `https://urdreamhoused-backend-1f3cc2e36009.herokuapp.com/api/properties/edit-property/${id}`,
         updatedData
       );
       return response.data;
@@ -87,7 +87,7 @@ export const deletePropertyById = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/properties/delete-property/${id}`
+        `https://urdreamhoused-backend-1f3cc2e36009.herokuapp.com/api/properties/delete-property/${id}`
       );
       return response.data;
     } catch (error) {

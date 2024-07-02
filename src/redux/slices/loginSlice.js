@@ -9,7 +9,7 @@ export const loginUser = createAsyncThunk(
   async (logindata, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/auth/login",
+        "https://urdreamhoused-backend-1f3cc2e36009.herokuapp.com/api/auth/login",
         logindata
       );
       // Only return the data you need, exclude non-serializable parts
@@ -35,7 +35,7 @@ export const fetchUser = createAsyncThunk(
   "user/fetchUser",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("http://localhost:4000/api/auth/");
+      const response = await axios.get("https://urdreamhoused-backend-1f3cc2e36009.herokuapp.com/api/auth/");
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -51,7 +51,7 @@ export const logoutUser = createAsyncThunk(
     "user/logoutUser",
     async (_, { rejectWithValue }) => {
       try {
-        const response = await axios.get("http://localhost:4000/api/auth/logout");
+        const response = await axios.get("https://urdreamhoused-backend-1f3cc2e36009.herokuapp.com/api/auth/logout");
         if (response.data === "success") {
           return "success";
         } else {
