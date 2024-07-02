@@ -11,7 +11,7 @@ export const createProperty = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://192.168.1.77:4000/api/properties/create-property",
+        "http://localhost:4000/api/properties/create-property",
         formData,
         {
           headers: {
@@ -37,7 +37,7 @@ export const fetchAllProperties = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "http://192.168.1.77:4000/api/properties/all"
+        "http://localhost:4000/api/properties/all"
       );
       return response.data;
     } catch (error) {
@@ -53,7 +53,7 @@ export const getPropertyById = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://192.168.1.77:4000/api/properties/getpropertybyid/${id}`
+        `http://localhost:4000/api/properties/getpropertybyid/${id}`
       );
       return response.data;
     } catch (error) {
@@ -70,7 +70,7 @@ export const updatePropertyById = createAsyncThunk(
 
     try {
       const response = await axios.put(
-        `http://192.168.1.77:4000/api/properties/edit-property/${id}`,
+        `http://localhost:4000/api/properties/edit-property/${id}`,
         updatedData
       );
       return response.data;
@@ -86,7 +86,7 @@ export const deletePropertyById = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `http://192.168.1.77:4000/api/properties/delete-property/${id}`
+        `http://localhost:4000/api/properties/delete-property/${id}`
       );
       return response.data;
     } catch (error) {
