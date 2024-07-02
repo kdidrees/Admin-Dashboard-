@@ -51,7 +51,7 @@ export default function AllProperty() {
                           {property.address}
                         </h2>
 
-                        <div className="flex">
+                        {/* <div className="flex">
                           <span className="mt-3">
                             <CiLocationOn style={{ fontSize: "1.7rem" }} />
                           </span>
@@ -59,7 +59,7 @@ export default function AllProperty() {
                             {" "}
                             Richmond Place 1312, Charlotte, New York
                           </p>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="flex  mb-2 flex-col">
                         <h2 className="lg:text-2xl text-xl font-semibold font-roboto">
