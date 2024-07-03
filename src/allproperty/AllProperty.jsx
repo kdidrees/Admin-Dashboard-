@@ -36,6 +36,7 @@ export default function AllProperty() {
     <>
       <div className="lg:mx-16 mt-48">
         {properties?.map((property) => {
+          console.log(property.images,'ye rha img')
           return (
             <>
               <div key={property._id}>
@@ -43,7 +44,7 @@ export default function AllProperty() {
                   <div className="bg-white shadow-lg rounded p-4 mb-4 flex justify-between lg:flex-row flex-col cursor-pointer">
                     <div className="flex-shrink-0">
                       <img
-                        src={`http://192.168.1.77:4000/Images/${property.images[0]
+                        src={`https://urdreamhoused-backend-1f3cc2e36009.herokuapp.com/Images/${property.images[0]
                           .split("public\\Images\\")
                           .join("")}`}
                         alt="Map 1"
